@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<classPathEntry
+		location="C:\work_soft\maven_jar\respository\mysql\mysql-connector-java\5.1.28\mysql-connector-java-5.1.28.jar" />
+	<context id="context1">
+		<plugin type="com.wana.fruit.machine.util.mybatis.MapperExtGenerateplugin" />
+		<plugin type="com.wana.fruit.machine.util.mybatis.PageHelperPlugin" />
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<!--数据库链接URL，用户名、密码 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://192.168.1.81:3366/fruit_machine" userId="fruit_machine"
+			password="fruit_machine123456" />
+
+		<!-- 生成模型的包名和位置 -->
+		<javaModelGenerator targetPackage="com.wana.fruit.machine.model.entity"
+			targetProject="src/main/java" />
+
+		<!-- 生成映射文件的包名和位置 -->
+		<sqlMapGenerator targetPackage="com.wana.fruit.machine.mapper.xml"
+			targetProject="src/main/java" />
+
+		<!-- 生成DAO的包名和位置 -->
+		<javaClientGenerator targetPackage="com.wana.fruit.machine.mapper"
+			targetProject="src/main/java" type="XMLMAPPER" />
+		<!-- 
+		<table tableName="game" domainObjectName="Game"></table>
+		<table tableName="game_item_config" domainObjectName="GameItemConfig">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="game_map_config" domainObjectName="GameMapConfig"></table>
+		 -->
+		<table tableName="game_record" domainObjectName="GameRecord"></table>
+	</context>
+</generatorConfiguration>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wana.fruit.machine.mapper.GameRecordMapperExt">
+	<sql id="searchGameRecordCondition">
+		<where>
+			<if test="userId != null">
+				user_id = #{userId}
+			</if>
+			<if test="start != null">
+				and create_time &gt;= #{start}
+			</if>
+			<if test="end != null">
+				and create_time &lt;= #{end}
+			</if>
+			<if test="prize != null">
+				and is_prize = #{prize}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="findGameRecords" resultMap="BaseResultMap"
+		parameterType="com.wana.fruit.machine.model.dto.game.GameRecordListReqDto" >
+		select
+		<include refid="Base_Column_List" />
+		from game_record
+		<include refid="searchGameRecordCondition" />
+		order by create_time desc
+		limit #{pageNumber},#{pageSize}
+	</select>
+	
+	<select id="countGameRecords" resultType="int">
+		select count(0) from game_record
+		<include refid="searchGameRecordCondition" />
+	</select>
+</mapper>
